@@ -5,12 +5,11 @@
 
 ## 예시화면 및 영상
 - 아래 화면은 예시 화면이며 아래와 같은 화면구성, 기능을 구현 하면 됩니다.
-- [예제 APK 다운로드](https://github.com/ParkSangGwon/boost-camp-3-android/raw/master/app-release.apk)
+- [예제 APK 다운로드](https://github.com/boostcamp-connect/boostcamp_3_Android/raw/master/app-release.apk)
 <br><br>
 
-![Screenshot](https://github.com/ParkSangGwon/boost-camp-3-android/blob/master/screenshot1.jpg?raw=true)  ![Screenshot](https://github.com/ParkSangGwon/boost-camp-3-android/blob/master/screenshot2.gif?raw=true)
-<br>
-- 실행영상: https://youtu.be/yyHT3r48Zo8
+![Screenshot](https://github.com/boostcamp-connect/boostcamp_3_Android/blob/master/screenshot1.jpg?raw=true)  ![Screenshot](https://github.com/boostcamp-connect/boostcamp_3_Android/blob/master/screenshot2.gif?raw=true)
+
 
 # 구현
 ## 필수 구현사항
@@ -49,5 +48,5 @@
 - 본인의 Github 계정에 과제 Repository를 만들고 Repository 주소 명시
 
 # 기타
-- 과제구현 질문은 [Issues탭](https://github.com/ParkSangGwon/boost-camp-3-android/issues)에 등록해주시면 답변드립니다.
+- 과제구현 질문은 [Issues탭](https://github.com/boostcamp-connect/boostcamp_3_Android/issues)에 등록해주시면 답변드립니다.
 - 선택 구현사항외에도 본인의 노하우, 실력을 뽐낼 수 있는 기술이나 코드가 있다면 포함할경우 추가로 가산점을 받게 됩니다.
