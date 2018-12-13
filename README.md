@@ -47,6 +47,7 @@
 # 과제제출 방법
 - 본인의 Github 계정에 과제 Repository를 만들고 Repository 주소 명시
 - APK파일, 스크린샷 이미지는 올리지 않아도 됩니다.
+- 본인의 Repository가 Public으로 공개되는걸 원치 않으실경우, Private로 만든뒤 collaborator에 boostcamp-connect 계정을 추가해 주시면 됩니다.
 
 # 기타
 - 과제구현 질문은 [Issues탭](https://github.com/boostcamp-connect/boostcamp_3_Android/issues)에 등록해주시면 답변드립니다.
