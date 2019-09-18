@@ -21,8 +21,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MovieDatabaseTest {
 
-    MovieDatabase db;
-    MovieDao movieDao;
+    private MovieDatabase db;
+    private MovieDao movieDao;
 
     @Before
     public void setup() {

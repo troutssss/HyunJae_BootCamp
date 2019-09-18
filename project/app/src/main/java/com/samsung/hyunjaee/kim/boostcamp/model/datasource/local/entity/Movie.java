@@ -3,12 +3,14 @@ package com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "movies")
 public class Movie {
 
-    private final static String UNKNOWN_ID = "unknown";
+    @Ignore
+    private static final String UNKNOWN_ID = "unknown";
 
     @PrimaryKey
     @NonNull

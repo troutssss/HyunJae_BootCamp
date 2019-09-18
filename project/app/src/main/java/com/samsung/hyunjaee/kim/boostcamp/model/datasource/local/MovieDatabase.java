@@ -12,22 +12,21 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
-@Database(entities = {Movie.class}, version = DatabaseConstant.version)
+@Database(entities = {Movie.class}, version = DatabaseConstant.VERSION)
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static final String TAG = "MovieDatabase";
 
     public abstract MovieDao movieDao();
 
-    private static volatile MovieDatabase INSTANCE;
-
+    private static MovieDatabase sInstance;
 
     @VisibleForTesting
     public static MovieDatabase getDatabase(final Context context) {
-        if (INSTANCE == null) {
+        if (sInstance == null) {
             synchronized (MovieDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                if (sInstance == null) {
+                    sInstance = Room.databaseBuilder(context.getApplicationContext(),
                             MovieDatabase.class, DatabaseConstant.DATABASE_NAME)
                             .addCallback(new Callback() {
                                 @Override
@@ -40,7 +39,7 @@ public abstract class MovieDatabase extends RoomDatabase {
                 }
             }
         }
-        return INSTANCE;
+        return sInstance;
     }
 
 }
