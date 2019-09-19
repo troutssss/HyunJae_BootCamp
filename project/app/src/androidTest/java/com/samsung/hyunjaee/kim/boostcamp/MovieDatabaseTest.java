@@ -63,4 +63,28 @@ public class MovieDatabaseTest {
         assertThat(movieList.get(0).getDate(), equalTo(date));
 
     }
+
+    @Test
+    public void Should_GetMovie_When_FindByTitle() {
+        String id = "id";
+        long date = 0L;
+        String title = "title";
+        Movie movie = new Movie(id);
+        movie.setDate(date);
+        movie.setTitle(title);
+        movieDao.insertMovie(movie);
+
+        List<Movie> movieList = movieDao.getAllMovies();
+        assertThat(movieList.size(), is(1));
+        assertThat(movieList.get(0).getDate(), equalTo(date));
+
+        movieList = movieDao.findMovieByTitle(title);
+        assertThat(movieList.size(), is(1));
+        assertThat(movieList.get(0).getDate(), equalTo(date));
+
+        movieList = movieDao.findMovieByTitle("tit");
+        assertThat(movieList.size(), is(1));
+        assertThat(movieList.get(0).getDate(), equalTo(date));
+
+    }
 }

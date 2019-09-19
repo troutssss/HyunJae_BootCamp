@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -21,7 +20,6 @@ public abstract class MovieDatabase extends RoomDatabase {
 
     private static MovieDatabase sInstance;
 
-    @VisibleForTesting
     public static MovieDatabase getDatabase(final Context context) {
         if (sInstance == null) {
             synchronized (MovieDatabase.class) {
