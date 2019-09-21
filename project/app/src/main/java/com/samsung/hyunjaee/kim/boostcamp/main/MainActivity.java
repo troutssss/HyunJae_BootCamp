@@ -10,8 +10,6 @@ import com.samsung.hyunjaee.kim.boostcamp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
     private MainFragment mMainFragment;
 
     @Override

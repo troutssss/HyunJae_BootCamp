@@ -1,7 +1,6 @@
 package com.samsung.hyunjaee.kim.boostcamp.model.datasource.local;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -11,10 +10,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
+import timber.log.Timber;
+
 @Database(entities = {Movie.class}, version = DatabaseConstant.VERSION)
 public abstract class MovieDatabase extends RoomDatabase {
-
-    private static final String TAG = "MovieDatabase";
 
     public abstract MovieDao movieDao();
 
@@ -30,7 +29,13 @@ public abstract class MovieDatabase extends RoomDatabase {
                                 @Override
                                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
                                     super.onOpen(db);
-                                    Log.d(TAG, "onOpen()");
+                                    Timber.d("onOpen()");
+                                }
+
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+                                    Timber.d("onCreate()");
                                 }
                             })
                             .build();

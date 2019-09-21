@@ -11,8 +11,6 @@ import java.util.List;
 
 public class MovieRepositoryImpl implements MovieRepository {
 
-    private static final String TAG = "MovieRepositoryImpl";
-
     private MovieDao mMovieDao;
 
     public MovieRepositoryImpl(Context context) {

@@ -1,7 +1,6 @@
 package com.samsung.hyunjaee.kim.boostcamp.main;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.samsung.hyunjaee.kim.boostcamp.R;
 import com.samsung.hyunjaee.kim.boostcamp.databinding.FragmentMainBinding;
 
-public class MainFragment extends Fragment {
+import timber.log.Timber;
 
-    private static final String TAG = "MainFragment";
+public class MainFragment extends Fragment {
 
     private FragmentMainBinding mBinding;
     private MainViewModel mViewModel;
@@ -38,11 +37,9 @@ public class MainFragment extends Fragment {
         mBinding.setLifecycleOwner(this);
         mBinding.setViewModel(mViewModel);
 
-        mViewModel.getMovieList().observe(this, movieList -> {
-            movieList.forEach(movie -> {
-                Log.d(TAG, movie.toString());
-            });
-        });
+        mViewModel.getMovieList().observe(this, movieList -> movieList.forEach(movie -> {
+            Timber.d(movie.toString());
+        }));
         mViewModel.addDummyMovie();
         return mBinding.getRoot();
     }

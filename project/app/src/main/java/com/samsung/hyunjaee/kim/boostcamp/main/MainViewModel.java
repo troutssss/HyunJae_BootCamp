@@ -2,7 +2,6 @@ package com.samsung.hyunjaee.kim.boostcamp.main;
 
 import android.app.Application;
 import android.os.SystemClock;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -17,16 +16,16 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class MainViewModel extends AndroidViewModel {
-
-    private static final String TAG = "MainViewModel";
 
     private LiveData<List<Movie>> mMovieList;
     private MovieRepository mMovieRepository;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+        Timber.d("MainViewModel()");
         mMovieRepository = new MovieRepositoryImpl(getApplication());
         mMovieList = mMovieRepository.getAllMovies();
     }
@@ -41,9 +40,7 @@ public class MainViewModel extends AndroidViewModel {
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    Log.d(TAG, "onAdd");
-                })
+                .subscribe(() -> Timber.d("onAdd"))
                 .isDisposed();
     }
 
