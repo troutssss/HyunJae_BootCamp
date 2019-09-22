@@ -13,12 +13,15 @@ import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
 public class MainViewModel extends AndroidViewModel {
 
     private LiveData<List<Movie>> mMovieList;
     private MovieRepository mMovieRepository;
+
+    private CompositeDisposable mDisposable = new CompositeDisposable();
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -32,11 +35,23 @@ public class MainViewModel extends AndroidViewModel {
         Movie movie = new Movie(currentTime + "");
         movie.setTitle("title" + currentTime);
         mMovieRepository.addMovie(movie)
+                .doOnSubscribe(mDisposable::add)
                 .subscribe(() -> Timber.d("Add Movie complete"), Timber::e)
                 .isDisposed();
     }
 
     public LiveData<List<Movie>> getMovieList() {
         return mMovieList;
+    }
+
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        Timber.d("onCleared");
+        if (!mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+
     }
 }
