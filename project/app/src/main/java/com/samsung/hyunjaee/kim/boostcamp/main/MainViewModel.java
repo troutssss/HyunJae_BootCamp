@@ -13,9 +13,6 @@ import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class MainViewModel extends AndroidViewModel {
@@ -31,16 +28,11 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void addDummyMovie() {
-        Completable.create(emitter -> {
-            Long currentTime = SystemClock.currentThreadTimeMillis();
-            Movie movie = new Movie(currentTime + "");
-            movie.setTitle("title");
-            mMovieRepository.addMovie(movie);
-            emitter.onComplete();
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> Timber.d("onAdd"))
+        long currentTime = SystemClock.currentThreadTimeMillis();
+        Movie movie = new Movie(currentTime + "");
+        movie.setTitle("title" + currentTime);
+        mMovieRepository.addMovie(movie)
+                .subscribe(() -> Timber.d("Add Movie complete"), Timber::e)
                 .isDisposed();
     }
 

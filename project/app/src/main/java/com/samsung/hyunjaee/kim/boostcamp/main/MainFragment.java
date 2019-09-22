@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.samsung.hyunjaee.kim.boostcamp.R;
 import com.samsung.hyunjaee.kim.boostcamp.databinding.FragmentMainBinding;
@@ -37,10 +38,13 @@ public class MainFragment extends Fragment {
         mBinding.setLifecycleOwner(this);
         mBinding.setViewModel(mViewModel);
 
+        MovieListAdapter movieListAdapter = new MovieListAdapter(this, mViewModel);
+        mBinding.movieList.setAdapter(movieListAdapter);
+        mBinding.movieList.setLayoutManager(new LinearLayoutManager(getContext()));
         mViewModel.getMovieList().observe(this, movieList -> movieList.forEach(movie -> {
-            Timber.d(movie.toString());
+            Timber.d(movie.getTitle());
         }));
-        mViewModel.addDummyMovie();
+
         return mBinding.getRoot();
     }
 }

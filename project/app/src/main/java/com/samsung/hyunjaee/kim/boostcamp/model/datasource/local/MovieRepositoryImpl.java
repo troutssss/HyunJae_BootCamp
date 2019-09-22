@@ -9,6 +9,10 @@ import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class MovieRepositoryImpl implements MovieRepository {
 
     private MovieDao mMovieDao;
@@ -28,7 +32,14 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public void addMovie(Movie movie) {
-        mMovieDao.insertMovie(movie);
+    public Completable addMovie(Movie movie) {
+
+        return Completable.create(emitter -> {
+            mMovieDao.insertMovie(movie);
+            emitter.onComplete();
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
     }
 }

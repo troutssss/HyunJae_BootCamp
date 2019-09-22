@@ -16,6 +16,12 @@ android {
                         "room.incremental"   : "true"]
             }
         }
+
+        testOptions {
+            unitTests {
+                includeAndroidResources = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -62,8 +68,15 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-
+    // JVM Test
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.robolectric:robolectric:4.3"
     testImplementation "androidx.room:room-testing:$room_version"
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+
+
+    // Android Test
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'

@@ -1,12 +1,10 @@
-package com.samsung.hyunjaee.kim.boostcamp;
+package com.samsung.hyunjaee.kim.boostcamp.model.datasource.local;
 
 import android.content.Context;
 
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.MovieDao;
-import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.MovieDatabase;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import org.junit.After;
