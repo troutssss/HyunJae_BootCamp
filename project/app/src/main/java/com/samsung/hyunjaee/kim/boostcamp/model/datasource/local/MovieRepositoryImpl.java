@@ -1,13 +1,13 @@
 package com.samsung.hyunjaee.kim.boostcamp.model.datasource.local;
 
-import android.content.Context;
-
 import androidx.lifecycle.LiveData;
 
 import com.samsung.hyunjaee.kim.boostcamp.model.MovieRepository;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,8 +17,9 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     private MovieDao mMovieDao;
 
-    public MovieRepositoryImpl(Context context) {
-        mMovieDao = MovieDatabase.getDatabase(context).movieDao();
+    @Inject
+    MovieRepositoryImpl(MovieDao movieDao) {
+        mMovieDao = movieDao;
     }
 
     @Override

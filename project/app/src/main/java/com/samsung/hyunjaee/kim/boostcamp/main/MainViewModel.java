@@ -8,10 +8,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.samsung.hyunjaee.kim.boostcamp.model.MovieRepository;
-import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.MovieRepositoryImpl;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
@@ -19,14 +20,16 @@ import timber.log.Timber;
 public class MainViewModel extends AndroidViewModel {
 
     private LiveData<List<Movie>> mMovieList;
+
     private MovieRepository mMovieRepository;
 
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
-    public MainViewModel(@NonNull Application application) {
+    @Inject
+    public MainViewModel(@NonNull Application application, MovieRepository movieRepository) {
         super(application);
         Timber.d("MainViewModel()");
-        mMovieRepository = new MovieRepositoryImpl(getApplication());
+        this.mMovieRepository = movieRepository;
         mMovieList = mMovieRepository.getAllMovies();
     }
 

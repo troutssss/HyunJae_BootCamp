@@ -17,7 +17,6 @@ import timber.log.Timber;
 
 public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
     private MainViewModel mViewModel;
     private LifecycleOwner mLifecycleOwner;
     private List<Movie> mMovieList = Collections.emptyList();
