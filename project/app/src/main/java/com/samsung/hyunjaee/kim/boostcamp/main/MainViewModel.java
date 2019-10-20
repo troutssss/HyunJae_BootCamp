@@ -1,11 +1,11 @@
 package com.samsung.hyunjaee.kim.boostcamp.main;
 
 import android.app.Application;
-import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.samsung.hyunjaee.kim.boostcamp.model.MovieRepository;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
@@ -19,34 +19,37 @@ import timber.log.Timber;
 
 public class MainViewModel extends AndroidViewModel {
 
-    private LiveData<List<Movie>> mMovieList;
+    private MutableLiveData<List<Movie>> mMovieList = new MutableLiveData<>();
+    private MutableLiveData<String> mQuery = new MutableLiveData<>();
 
-    private MovieRepository mMovieRepository;
+    MovieRepository mMovieRepository;
 
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
     @Inject
-    public MainViewModel(@NonNull Application application, MovieRepository movieRepository) {
+    MainViewModel(@NonNull Application application, MovieRepository movieRepository) {
         super(application);
         Timber.d("MainViewModel()");
-        this.mMovieRepository = movieRepository;
-        mMovieList = mMovieRepository.getAllMovies();
+        mMovieRepository = movieRepository;
+        findMovies("Captain Marvel");
     }
 
-    public void addDummyMovie() {
-        long currentTime = SystemClock.currentThreadTimeMillis();
-        Movie movie = new Movie(currentTime + "");
-        movie.setTitle("title" + currentTime);
-        mMovieRepository.addMovie(movie)
-                .doOnSubscribe(mDisposable::add)
-                .subscribe(() -> Timber.d("Add Movie complete"), Timber::e)
-                .isDisposed();
+    public void findMovies(String title) {
+        mDisposable.add(mMovieRepository.findMovie(title)
+                .subscribe(movieList -> mMovieList.postValue(movieList), throwable -> Timber.e(throwable)));
     }
 
-    public LiveData<List<Movie>> getMovieList() {
+    LiveData<List<Movie>> getMovieList() {
         return mMovieList;
     }
 
+    public MutableLiveData<String> getQuery() {
+        return mQuery;
+    }
+
+    public void setQuery(MutableLiveData<String> mQuery) {
+        this.mQuery = mQuery;
+    }
 
     @Override
     protected void onCleared() {

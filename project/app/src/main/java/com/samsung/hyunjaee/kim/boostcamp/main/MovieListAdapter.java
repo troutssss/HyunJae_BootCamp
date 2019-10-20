@@ -29,7 +29,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void submitList(List<Movie> movieList) {
         Timber.d("submitList");
+        movieList.forEach(movie -> Timber.d(movie.getTitle()));
         mMovieList = movieList;
+
         // todo :: implements DiffUtil for this.
         notifyDataSetChanged();
     }

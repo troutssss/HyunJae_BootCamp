@@ -19,28 +19,18 @@ public abstract class MovieDatabase extends RoomDatabase {
 
     private static MovieDatabase sInstance;
 
-    public static MovieDatabase getDatabase(final Context context) {
+    static MovieDatabase getDatabase(final Context context) {
         if (sInstance == null) {
-            synchronized (MovieDatabase.class) {
-                if (sInstance == null) {
-                    sInstance = Room.databaseBuilder(context.getApplicationContext(),
-                            MovieDatabase.class, DatabaseConstant.DATABASE_NAME)
-                            .addCallback(new Callback() {
-                                @Override
-                                public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                                    super.onOpen(db);
-                                    Timber.d("onOpen()");
-                                }
-
-                                @Override
-                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                    super.onCreate(db);
-                                    Timber.d("onCreate()");
-                                }
-                            })
-                            .build();
-                }
-            }
+            sInstance = Room.databaseBuilder(context.getApplicationContext(),
+                    MovieDatabase.class, DatabaseConstant.DATABASE_NAME)
+                    .addCallback(new Callback() {
+                        @Override
+                        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                            super.onOpen(db);
+                            Timber.d("onOpen()");
+                        }
+                    })
+                    .build();
         }
         return sInstance;
     }

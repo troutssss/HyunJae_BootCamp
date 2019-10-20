@@ -1,32 +1,22 @@
 package com.samsung.hyunjaee.kim.boostcamp;
 
-import android.content.Context;
-
 import com.samsung.hyunjaee.kim.boostcamp.model.MovieRepository;
-import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.MovieRepositoryImpl;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-public class MovieRepositoryTest {
+import javax.inject.Inject;
 
-    @Mock
-    Context mContext;
+public class MovieRepositoryTest {
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
+    @Inject
     MovieRepository mMovieRepository;
-
-    @Before
-    public void setup() {
-        mMovieRepository = new MovieRepositoryImpl(mContext);
-    }
 
 
     @Test

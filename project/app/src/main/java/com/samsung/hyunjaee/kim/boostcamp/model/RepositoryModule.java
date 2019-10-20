@@ -1,7 +1,5 @@
 package com.samsung.hyunjaee.kim.boostcamp.model;
 
-import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.MovieRepositoryImpl;
-
 import dagger.Module;
 import dagger.Provides;
 
