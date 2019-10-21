@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.MovieDao;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 import com.samsung.hyunjaee.kim.boostcamp.model.datasource.remote.MovieApi;
-import com.samsung.hyunjaee.kim.boostcamp.model.datasource.remote.entity.MovieDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -21,18 +19,20 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     private MovieDao mMovieDao;
     private MovieApi mMovieApi;
+    private MovieConverter mMovieConverter;
 
     @Inject
-    MovieRepositoryImpl(MovieDao movieDao, MovieApi movieApi) {
+    MovieRepositoryImpl(MovieDao movieDao, MovieApi movieApi, MovieConverter movieConverter) {
         mMovieApi = movieApi;
         mMovieDao = movieDao;
+        mMovieConverter = movieConverter;
     }
 
     @Override
     public Single<List<Movie>> findMovie(String title) {
         return mMovieApi.findMovies(title)
                 .flatMap(remoteList ->
-                        Single.fromCallable(() -> convertMovieList(remoteList)))
+                        Single.fromCallable(() -> mMovieConverter.convertList(remoteList)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -52,17 +52,5 @@ public class MovieRepositoryImpl implements MovieRepository {
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-
     }
-
-    private List<Movie> convertMovieList(List<MovieDto> remoteList) {
-        return remoteList.stream()
-                .map(movieDto -> {
-                    Movie movie = new Movie(movieDto.getTitle());
-                    movie.setTitle(movieDto.getTitle());
-                    return movie;
-                })
-                .collect(Collectors.toList());
-    }
-
 }

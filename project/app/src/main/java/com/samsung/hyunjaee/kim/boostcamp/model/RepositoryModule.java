@@ -14,4 +14,9 @@ public class RepositoryModule {
     static MovieRepository provideMovieRepository(MovieRepositoryImpl movieRepository) {
         return movieRepository;
     }
+
+    @Provides
+    static MovieConverter provideMovieConverter() {
+        return new MovieConverter();
+    }
 }
