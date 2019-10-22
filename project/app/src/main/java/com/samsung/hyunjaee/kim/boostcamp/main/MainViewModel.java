@@ -31,7 +31,7 @@ public class MainViewModel extends AndroidViewModel {
         super(application);
         Timber.d("MainViewModel()");
         mMovieRepository = movieRepository;
-        findMovies("Captain Marvel");
+        findMovies("Joker");
     }
 
     public void findMovies(String title) {

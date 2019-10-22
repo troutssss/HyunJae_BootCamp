@@ -52,6 +52,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         MovieItemViewHolder viewHolder = (MovieItemViewHolder) holder;
         Movie movie = mMovieList.get(position);
         viewHolder.binding.movieTitle.setText(movie.getTitle());
+        viewHolder.binding.movieTitle.setOnClickListener(v -> {
+            viewHolder.binding.movieTitle.setText("Test");
+        });
+
     }
 
     @Override
