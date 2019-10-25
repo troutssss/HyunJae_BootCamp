@@ -6,7 +6,6 @@ import com.samsung.hyunjaee.kim.boostcamp.model.datasource.local.entity.Movie;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public interface MovieRepository {
@@ -14,7 +13,4 @@ public interface MovieRepository {
     Single<List<Movie>> findMovie(String title);
 
     LiveData<List<Movie>> getAllMovies();
-
-    // Just for test method
-    Completable addMovie(Movie movie);
 }

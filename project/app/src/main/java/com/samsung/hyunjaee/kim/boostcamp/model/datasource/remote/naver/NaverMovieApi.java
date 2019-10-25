@@ -33,7 +33,7 @@ public class NaverMovieApi implements MovieApi {
                 public void onResponse(@NotNull Call<MovieInfo> call, @NotNull Response<MovieInfo> response) {
                     Timber.d(response.toString());
                     if (response.body() != null) {
-                        response.body().getMovieList().forEach(movieDto -> Timber.d(movieDto.getTitle()));
+                        response.body().getMovieList().forEach(movieDto -> Timber.d(movieDto.toString()));
                         emitter.onSuccess(response.body().getMovieList());
                     } else {
                         emitter.onError(new Throwable("body is empty"));

@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -43,14 +42,4 @@ public class MovieRepositoryImpl implements MovieRepository {
         return mMovieDao.getMovies();
     }
 
-    @Override
-    public Completable addMovie(Movie movie) {
-
-        return Completable.create(emitter -> {
-            mMovieDao.insertMovie(movie);
-            emitter.onComplete();
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
 }

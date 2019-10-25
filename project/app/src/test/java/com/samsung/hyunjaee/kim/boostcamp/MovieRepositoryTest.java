@@ -21,8 +21,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void Should_AddMovie_When_InsertDummyMovie() {
-
-        mMovieRepository.addMovie(new Movie("asdf"));
         // todo :: Apply Dagger2 and create mock object for this test.
     }
 
